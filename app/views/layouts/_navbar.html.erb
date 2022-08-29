@@ -1,0 +1,28 @@
+<nav>
+    <div class="container mx-auto flex justify-between pt-5">
+        <div class="logo flex">
+          <img class="" alt="Event Factory" width="42" height="42"  src="https://upload.wikimedia.org/wikipedia/commons/1/19/Factory_black.png">
+          <button class="ml-1 py-2 font-sans font-semibold">
+          <%= link_to "Event Factory", "/" %>
+          </button>
+        </div>
+        <div class="py-2">
+          <button class="hover:text-slate-700">Events</button>
+        </div>
+
+       
+        <div class="py-2"> 
+            <% if !current_user %>
+              <button class="hover:text-slate-700"> <%= link_to "Login", "login" %> </button>
+              <button class="hover:text-slate-700"> <%= link_to "Sign In", "register" %> </button>
+            <%end%>
+
+            <% if current_user %>
+              <button class="hover:text-slate-700">  <%= link_to "Create Event", new_event_path %> </button>
+              <button class="hover:text-slate-700">   <%= link_to "Profile", current_user %> </button>
+              <button class="hover:text-slate-700">   <%= button_to "Log out", "logout", method: "delete" %> </button>
+            <%end%>
+        
+        </div>
+      </div> 
+    </nav>

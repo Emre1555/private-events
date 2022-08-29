@@ -1,1 +1,13 @@
-<h1> Events here </h1>
+<h1> Events here </h1> <br>
+
+
+<% @events.each do |event| %>
+    <%= event.name %>
+    <%= event.location%>
+    <%= event.date%>
+<%end%>
+
+<% if current_user.present? %>
+<p>Hello <%=current_user.nickname%>!!!</p>
+
+<%end %>
