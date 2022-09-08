@@ -1,28 +1,36 @@
-<nav>
+
+<nav class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg text-gray-700 bg-white" >
     <div class="container mx-auto flex justify-between pt-5">
-        <div class="logo flex">
-          <img class="" alt="Event Factory" width="42" height="42"  src="https://upload.wikimedia.org/wikipedia/commons/1/19/Factory_black.png">
+
+        <div class="logo flex my-3">
+          <img class="" alt="Event Factory" width="42" height="30"  src="https://upload.wikimedia.org/wikipedia/commons/1/19/Factory_black.png">
           <button class="ml-1 py-2 font-sans font-semibold">
-          <%= link_to "Event Factory", "/" %>
+            <%= link_to "Event Factory", "/" %>
           </button>
         </div>
-        <div class="py-2">
-          <button class="hover:text-slate-700">Events</button>
-        </div>
 
-       
-        <div class="py-2"> 
-            <% if !current_user %>
-              <button class="hover:text-slate-700"> <%= link_to "Login", "login" %> </button>
-              <button class="hover:text-slate-700"> <%= link_to "Sign In", "register" %> </button>
-            <%end%>
-
-            <% if current_user %>
-              <button class="hover:text-slate-700">  <%= link_to "Create Event", new_event_path %> </button>
-              <button class="hover:text-slate-700">   <%= link_to "Profile", current_user %> </button>
-              <button class="hover:text-slate-700">   <%= button_to "Log out", "logout", method: "delete" %> </button>
-            <%end%>
-        
+      <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+        <ul class=" pt-4 text-base text-gray-700 md:flex md:justify-between md:pt-0">
+          <% if !current_user %>
+           <li>
+             <button class="md:p-4 py-2 block hover:text-purple-400"> <%= link_to "Login", new_user_session_path %> </button>
+           </li>
+           <li>
+             <button class="md:p-4 py-2 block hover:text-purple-400"> <%= link_to "Sign Up", new_user_registration_path %> </button>
+           </li>
+          <%end%>
+          <% if user_signed_in? %>
+            <li>
+              <button class="md:p-4 py-2 block hover:text-purple-400"> <%= link_to "Create Event", new_event_path %> </button>
+            </li>
+            <li>
+              <button class="md:p-4 py-2 block hover:text-purple-400"> <%= link_to "Profile", current_user %> </button>
+            </li>
+            <li>
+              <button class="md:p-4 py-2 block hover:text-purple-400"> <%= link_to "Log out", destroy_user_session_path, :method => :delete %> </button>
+            </li>
+          <%end%>
+        </ul>
         </div>
-      </div> 
-    </nav>
+    </div>
+</nav>

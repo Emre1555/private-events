@@ -1,0 +1,28 @@
+<p>New Event!</p>
+
+
+<%= @event.name %>
+<%= @event.location %>
+<%= @event.date %>
+
+<%if @event.attendees.size <=1%>
+  <%= @event.attendees.size %> person is attending this event.
+<%else%>
+  <%= @event.attendees.size %> people are attending this event.
+<%end%>
+
+<h1>People Attending to this Event:</h1>
+<% @event.attendees.each do |attendee| %>
+  <%= link_to attendee.nickname, user_path(attendee.id) %>
+<% end %>
+
+
+
+
+ <% if user_signed_in? %>
+    <% if @event.attendees.include?(current_user) %>
+      <%= button_to "Unattend", attendance_path(event_id: @event.id), method: :delete  %>
+    <%else%>
+      <%=button_to "Attend", attendance_index_path(event_id: @event.id), method: :post %>
+    <%end%>
+<% end %>
