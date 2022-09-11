@@ -1,28 +1,43 @@
-<p>New Event!</p>
+<div class="flex flex-col flex-wrap"> 
+    <div class="m-2 p-6 bg-white rounded-lg border border-gray-200 shadow-md basis-[90%]">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> <%= @event.name %> </h5>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <%= @event.location%> </p>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <%= @event.date%> </p>
+      <div> 
+        <p> Created by <%= link_to @event.creator.nickname, user_path(@event.creator.id) %> </p>
+        <div>
+          <%if @event.attendees.size <=1%>
+             <%= @event.attendees.size %> person is attending this event.
+          <%else%>
+            <%= @event.attendees.size %> people are attending this event.
+          <%end%> <br>
+
+          <% @event.attendees.each do |attendee| %>
+            <%= link_to attendee.nickname, user_path(attendee.id), class: 'text-blue-600 font-bold hover:text-purple-400' %>, 
+          <% end %>
+
+        </div>  
+      </div>
+
+      <div>
+        <% if user_signed_in? %>
+          <% if @event.attendees.include?(current_user) %>
+            <%= button_to "Leave Event", attendance_path(event_id: @event.id), method: :delete, class: 'text-center p-2 rounded bg-purple-500 text-white hover:bg-purple-400 focus:outline-none my-1' %>
+          <%else%>
+            <%=button_to "Join Event", attendance_index_path(event_id: @event.id), method: :post, class: 'text-center p-2 rounded bg-purple-500 text-white hover:bg-purple-400 focus:outline-none my-1' %>
+          <%end%>
+        <% end %>
+      </div>
+   </div> <br>
+
+  <%= link_to "Back to Events", events_path, class: 'ml-3  hover:text-purple-400' %>
+
+</div>
 
 
-<%= @event.name %>
-<%= @event.location %>
-<%= @event.date %>
-
-<%if @event.attendees.size <=1%>
-  <%= @event.attendees.size %> person is attending this event.
-<%else%>
-  <%= @event.attendees.size %> people are attending this event.
-<%end%>
-
-<h1>People Attending to this Event:</h1>
-<% @event.attendees.each do |attendee| %>
-  <%= link_to attendee.nickname, user_path(attendee.id) %>
-<% end %>
 
 
 
 
- <% if user_signed_in? %>
-    <% if @event.attendees.include?(current_user) %>
-      <%= button_to "Unattend", attendance_path(event_id: @event.id), method: :delete  %>
-    <%else%>
-      <%=button_to "Attend", attendance_index_path(event_id: @event.id), method: :post %>
-    <%end%>
-<% end %>
+
+ 

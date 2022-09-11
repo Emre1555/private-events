@@ -19,8 +19,15 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event was successfully created'
       redirect_to @event
     else
-      render :new, status: :unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
+  end
+  
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    flash[:notice] = 'Event was successfully deleted'
+    redirect_to events_path
   end
 
 

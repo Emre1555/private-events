@@ -16,8 +16,18 @@
 
     <%= render "layouts/navbar" %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <% unless notice.nil?%>
+    <div class="clear-both p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+      <span class="font-medium"><%= notice %></span>
+    </div>
+  <% end %>
+
+  <% unless alert.nil?%>
+    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+      <span class="font-medium"> <%= alert %> </span>
+    </div>
+  <% end %>
+
     
     <main class="container mx-auto mt-28">
       <%= yield %>
