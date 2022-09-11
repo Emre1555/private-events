@@ -36,9 +36,6 @@
 <div class="flex flex-row flex-wrap">
 
   <% @events.each do |event| %>
-  <% if event.any? %>
-    <h2> No events yet </h2>
-  <% end %>
     <% if event.date < Date.today %>
       <div class="m-2 p-6 bg-white rounded-lg border border-gray-200 shadow-md basis-[30%]">
         <div class="flex justify-between">
